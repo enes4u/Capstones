@@ -221,6 +221,7 @@ public class MainApp {
         }
     }
 
+
     private static void displayLedger() {
         System.out.println("Date | Time | Description | Vendor | Amount");
         for (Transactions transaction : transactions) {
@@ -251,7 +252,12 @@ public class MainApp {
         // This method should display a table of all payments in the `transactions` ArrayList.
         // The table should have columns for date, time, description, vendor, and amount.
     }
-
+    /**
+     * Displays the reports menu and allows the user to choose a reporting option such as:
+     * month-to-date, previous month, year-to-date, previous year, vendor search, or custom search.
+     *
+     * @param scanner the Scanner object used for user input
+     */
     private static void reportsMenu(Scanner scanner) {
         boolean running = true;
         while (running) {
@@ -309,7 +315,12 @@ public class MainApp {
         }
     }
 
-
+    /**
+     * Filters and displays all transactions between two dates (inclusive).
+     *
+     * @param startDate the beginning date to filter from (inclusive)
+     * @param endDate the ending date to filter to (inclusive)
+     */
     private static void filterTransactionsByDate(LocalDate startDate, LocalDate endDate) {
         System.out.println("Date | Time | Description | Vendor | Amount");
         boolean found = false; // Track if any transactions are found
@@ -334,7 +345,11 @@ public class MainApp {
         // Transactions that fall within the date range are printed to the console.
         // If no transactions fall within the date range, the method prints a message indicating that there are no results.
     }
-
+    /**
+     * Filters and displays transactions that match a specific vendor name.
+     *
+     * @param vendor the vendor name to filter by (case-insensitive)
+     */
     private static void filterTransactionsByVendor(String vendor) {
         System.out.println("Date | Time | Description | Vendor | Amount");
         boolean found = false; // Track if any transactions are found
@@ -357,6 +372,11 @@ public class MainApp {
         // If no transactions match the specified vendor name, the method prints a message indicating that there are no results.
     }
 
+    /**
+     * Filters and displays transactions for the current month up to today.
+     *
+     * @param date the current date used to determine the month and year
+     */
     private static void filterByMonth(LocalDate date) {
         YearMonth currentMonth = YearMonth.of(date.getYear(), date.getMonth());
         LocalDate start = currentMonth.atDay(1);
@@ -370,12 +390,23 @@ public class MainApp {
         LocalDate end = previousMonth.atEndOfMonth();
         filterTransactionsByDate(start, end); // calling filter to display transactions from previous month
     }
-
+    /**
+     * Filters and displays transactions for the specified year up to today.
+     *
+     * @param year the year to filter transactions by
+     */
     private static void filterByYear(int year) {
         LocalDate start = LocalDate.of(year, 1, 1);
         LocalDate end = LocalDate.now();
         filterTransactionsByDate(start, end);
     }
+
+    /**
+     * Prompts the user for search criteria (start date, end date, description, vendor, amount),
+     * then filters and displays matching transactions.
+     *
+     * @param scanner the Scanner object used for user input
+     */
     // performing a custom search based on multiple criteria (date, description, vendor, and amount)
     private static void customSearch(Scanner scanner) {
         System.out.println("Enter start date (yyyy-MM-dd) or press Enter to skip: ");
@@ -401,6 +432,16 @@ public class MainApp {
     }
 
     //filter transactions based on the custom criteria provided by the user
+    /**
+     * Filters and displays transactions that match the provided custom criteria.
+     * Criteria include optional date range, description, vendor, and amount.
+     *
+     * @param startDate optional start date for filtering (nullable)
+     * @param endDate optional end date for filtering (nullable)
+     * @param description optional keyword to search in description (nullable)
+     * @param vendor optional vendor name to match (nullable)
+     * @param amount optional exact amount to match (nullable)
+     */
     private static void filterTransactionsCustom(LocalDate startDate, LocalDate endDate, String description, String vendor, Double amount) {
         System.out.println("Date | Time | Description | Vendor | Amount");
 
