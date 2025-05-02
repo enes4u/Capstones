@@ -83,6 +83,10 @@ private static void filterTransactionsCustom(LocalDate startDate, LocalDate endD
 **Why it’s interesting:** This method supports optional filters without requiring all fields to be filled in. It demonstrates clean control over dynamic query logic.
 
 ---
+![image](https://github.com/user-attachments/assets/ad1db2d8-c0b9-4095-916a-0090d73c4c4a)
+
+
+![image](https://github.com/user-attachments/assets/a2503f39-af05-48ec-abe3-e749e5acbffd)
 
 
 ---
