@@ -32,7 +32,9 @@ public class MainApp {
         while (running) {
             // Display main menu
             System.out.println("Welcome to TransactionApp");
+            System.out.println(" ");
             System.out.println("Choose an option:");
+            System.out.println(" ");
             System.out.println("D) Add Deposit");
             System.out.println("P) Make Payment (Debit)");
             System.out.println("L) Ledger");
@@ -107,7 +109,7 @@ public class MainApp {
 
 
     /**
-     * @param
+     * @param scanner
      * //This method should prompt the user to enter the date, time, description, vendor, and amount of a deposit.
      * The user should enter the date and time in the following format: yyyy-MM-dd HH:mm:ss
      * The amount should be a positive number.
@@ -223,7 +225,7 @@ public class MainApp {
 
 
     private static void displayLedger() {
-        System.out.println("Date | Time | Description | Vendor | Amount");
+        System.out.println("Date      | Time   | Description   | Vendor  | Amount");
         for (Transactions transaction : transactions) {
             System.out.println(transaction);
         }
@@ -232,7 +234,7 @@ public class MainApp {
     }
 
     private static void displayDeposits() {
-        System.out.println("Date | Time | Description | Vendor | Amount");
+        System.out.println("Date    | Time    | Description   | Vendor   | Amount");
         for (Transactions transaction : transactions) {
             if (transaction.getAmount() > 0) {
                 System.out.println(transaction);
@@ -322,7 +324,7 @@ public class MainApp {
      * @param endDate the ending date to filter to (inclusive)
      */
     private static void filterTransactionsByDate(LocalDate startDate, LocalDate endDate) {
-        System.out.println("Date | Time | Description | Vendor | Amount");
+        System.out.println("Date    | Time    | Description    | Vendor   | Amount");
         boolean found = false; // Track if any transactions are found
 
         for (Transactions transaction : transactions) {
@@ -351,7 +353,7 @@ public class MainApp {
      * @param vendor the vendor name to filter by (case-insensitive)
      */
     private static void filterTransactionsByVendor(String vendor) {
-        System.out.println("Date | Time | Description | Vendor | Amount");
+        System.out.println("Date    | Time    | Description   | Vendor | Amount");
         boolean found = false; // Track if any transactions are found
 
         for (Transactions transaction : transactions) {
@@ -443,7 +445,7 @@ public class MainApp {
      * @param amount optional exact amount to match (nullable)
      */
     private static void filterTransactionsCustom(LocalDate startDate, LocalDate endDate, String description, String vendor, Double amount) {
-        System.out.println("Date | Time | Description | Vendor | Amount");
+        System.out.println("Date    | Time    | Description   | Vendor | Amount");
 
         for (Transactions transactions : transactions) {
             boolean matches = true;
