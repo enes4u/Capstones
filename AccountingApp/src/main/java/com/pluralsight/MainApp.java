@@ -234,7 +234,7 @@ public class MainApp {
     }
 
     private static void displayDeposits() {
-        System.out.println("Date    | Time    | Description   | Vendor   | Amount");
+        System.out.println("Date      | Time   | Description   | Vendor  | Amount");
         for (Transactions transaction : transactions) {
             if (transaction.getAmount() > 0) {
                 System.out.println(transaction);
@@ -245,7 +245,8 @@ public class MainApp {
     }
 
     private static void displayPayments() {
-        System.out.println("Date | Time | Description | Vendor | Amount");
+        System.out.println("Date      | Time   | Description   | Vendor  | Amount");
+
         for (Transactions transaction : transactions) {
             if (transaction.getAmount() < 0) {
                 System.out.println(transaction);
@@ -324,7 +325,7 @@ public class MainApp {
      * @param endDate the ending date to filter to (inclusive)
      */
     private static void filterTransactionsByDate(LocalDate startDate, LocalDate endDate) {
-        System.out.println("Date    | Time    | Description    | Vendor   | Amount");
+        System.out.println("Date      | Time   | Description   | Vendor  | Amount");
         boolean found = false; // Track if any transactions are found
 
         for (Transactions transaction : transactions) {
@@ -353,7 +354,8 @@ public class MainApp {
      * @param vendor the vendor name to filter by (case-insensitive)
      */
     private static void filterTransactionsByVendor(String vendor) {
-        System.out.println("Date    | Time    | Description   | Vendor | Amount");
+        System.out.println("Date      | Time   | Description   | Vendor  | Amount");
+
         boolean found = false; // Track if any transactions are found
 
         for (Transactions transaction : transactions) {
@@ -445,7 +447,7 @@ public class MainApp {
      * @param amount optional exact amount to match (nullable)
      */
     private static void filterTransactionsCustom(LocalDate startDate, LocalDate endDate, String description, String vendor, Double amount) {
-        System.out.println("Date    | Time    | Description   | Vendor | Amount");
+        System.out.println("Date      | Time   | Description   | Vendor  | Amount");
 
         for (Transactions transactions : transactions) {
             boolean matches = true;
