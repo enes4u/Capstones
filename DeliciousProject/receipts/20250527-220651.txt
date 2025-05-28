@@ -1,0 +1,11 @@
+Order Summary:
+Sandwich 1:
+MEDIUM WHITE sandwich
+Toasted
+- Meat
+- RegularExtra (extra)
+- LettuceRegular
+
+SMALL drink - Coke ($2.0)
+FrenchFries chips ($1.50)
+Total: $12.50
