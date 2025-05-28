@@ -34,22 +34,94 @@ public class MainApp {
     private static void handleNewOrder() {
         Order order = new Order();
 
-        // Sample logic to add a sandwich
-        Sandwich sandwich = new Sandwich(BreadType.WHITE, Size.MEDIUM, true);
-        sandwich.addTopping(new Topping("Meat", ToppingType.MEAT, false));
-        sandwich.addTopping(new Topping("RegularExtra", ToppingType.REGULAR, true));
-        sandwich.addTopping(new Topping("LettuceRegular", ToppingType.REGULAR, false));
-        order.addSandwich(sandwich);
+        while (true) {
+            System.out.println("\nOrder Menu:");
+            System.out.println("1) Add Sandwich");
+            System.out.println("2) Add Drink");
+            System.out.println("3) Add Chips");
+            System.out.println("4) Checkout");
+            System.out.println("0) Cancel Order");
+            System.out.print("Select an option: ");
 
-        // Sample logic to add a drink
-        order.addDrink(new Drink(Size.SMALL, "Coke"));
+            int choice = scanner.nextInt();
+            scanner.nextLine();
 
-        // Sample logic to add chips
-        order.addChip(new Chip("FrenchFries"));
+            switch (choice) {
+                case 1:
+                    Sandwich sandwich = buildSandwich();
+                    order.addSandwich(sandwich);
+                    break;
+                case 2:
+                    order.addDrink(new Drink(promptSize(), prompt("Enter drink flavor: ")));
+                    break;
+                case 3:
+                    order.addChip(new Chip(prompt("Enter chip type: ")));
+                    break;
+                case 4:
+                    System.out.println("\n" + order.getOrderSummary());
+                    saveReceipt(order);
+                    return;
+                case 0:
+                    System.out.println("Order canceled.");
+                    return;
+                default:
+                    System.out.println("Invalid option.");
+            }
+        }
+    }
 
-        System.out.println("\n" + order.getOrderSummary());
+    private static Sandwich buildSandwich() {
+        System.out.println("Select bread type: WHITE, WHEAT, RYE, WRAP");
+        BreadType bread = BreadType.valueOf(scanner.nextLine().toUpperCase());
 
-        saveReceipt(order);
+        Size size = promptSize();
+
+        System.out.print("Would you like the sandwich toasted? (yes/no): ");
+        boolean toasted = scanner.nextLine().equalsIgnoreCase("yes");
+
+        Sandwich sandwich = new Sandwich(bread, size, toasted);
+
+        // Add toppings interactively
+        while (true) {
+            System.out.println("Add a topping (type \"done\" to finish): ");
+            String name = scanner.nextLine();
+            if (name.equalsIgnoreCase("done")) break;
+
+            ToppingType type = null;
+            while (type == null) {
+                try {
+                    System.out.println("Type: REGULAR, MEAT, CHEESE");
+                    String input = scanner.nextLine().toUpperCase();
+                    type = ToppingType.valueOf(input);
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Invalid topping type. Please enter REGULAR, MEAT, or CHEESE.");
+                }
+            }
+
+            System.out.print("Is this an extra? (yes/no): ");
+            boolean extra = scanner.nextLine().equalsIgnoreCase("yes");
+
+            sandwich.addTopping(new Topping(name, type, extra));
+        }
+
+        return sandwich;
+    }
+
+    private static Size promptSize() {
+        System.out.print("Select size (4, 8, 12 inches): ");
+        int inches = scanner.nextInt();
+        scanner.nextLine();
+        switch (inches) {
+            case 4: return Size.SMALL;
+            case 8: return Size.MEDIUM;
+            case 12: return Size.LARGE;
+            default: System.out.println("Invalid size. Defaulting to SMALL."); return Size.SMALL;
+        }
+    }
+
+    private static String prompt(String message) {
+        System.out.print(message);
+        return scanner.nextLine();
     }
 
     private static void saveReceipt(Order order) {
@@ -69,5 +141,8 @@ public class MainApp {
         }
     }
 
-    // @todo: input-driven sandwich customization will be implemented later
+    // TODO: SignatureSandwich class system to be implemented later
+
+
+    //  input-driven sandwich customization done
 }
