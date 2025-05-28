@@ -84,6 +84,7 @@ public class MainApp {
         // Add toppings interactively
         while (true) {
             System.out.println("Add a topping (type \"done\" to finish): ");
+            System.out.println("Type: REGULAR, MEAT, CHEESE");
             String name = scanner.nextLine();
             if (name.equalsIgnoreCase("done")) break;
 
