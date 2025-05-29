@@ -101,32 +101,114 @@ public class MainApp {
 
         Sandwich sandwich = new Sandwich(bread, size, toasted);
 
-        // Add toppings interactively
-        while (true) {
-            System.out.println("Add a topping (type \"done\" to finish): ");
+        // Offer advanced menu
+        System.out.println("Would you like to use the advanced topping menu? (y/n)");
+        String response = scanner.nextLine();
 
-            String name = scanner.nextLine();
-            if (name.equalsIgnoreCase("done")) break;
+        if (response.equalsIgnoreCase("y")) {
+            toppingCustomizerMenu(sandwich);  // Modular, structured topping selection
+        } else {
+            // Basic manual topping entry
+            while (true) {
+                System.out.println("Add a topping (type \"done\" to finish): ");
+                String name = scanner.nextLine();
+                if (name.equalsIgnoreCase("done")) break;
 
-            ToppingType type = null;
-            while (type == null) {
-                try {
-                    System.out.println("Type: REGULAR, MEAT, CHEESE");
-                    String input = scanner.nextLine().trim().toUpperCase();
-                    type = ToppingType.valueOf(input);
-                } catch (IllegalArgumentException e) {
-                    System.out.println("Invalid topping type. Please enter REGULAR, MEAT, or CHEESE.");
+                ToppingType type = null;
+                while (type == null) {
+                    try {
+                        System.out.println("Type: REGULAR, MEAT, CHEESE");
+                        String input = scanner.nextLine().trim().toUpperCase();
+                        type = ToppingType.valueOf(input);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Invalid topping type. Please enter REGULAR, MEAT, or CHEESE.");
+                    }
                 }
+
+                System.out.print("Is this an extra? (yes/no): ");
+                boolean extra = scanner.nextLine().equalsIgnoreCase("yes");
+
+                sandwich.addTopping(new Topping(name, type, extra));
             }
-
-            System.out.print("Is this an extra? (yes/no): ");
-            boolean extra = scanner.nextLine().equalsIgnoreCase("yes");
-
-            sandwich.addTopping(new Topping(name, type, extra));
         }
 
         return sandwich;
     }
+    private static void toppingCustomizerMenu(Sandwich sandwich) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\nWould you like to add toppings to your sandwich? (y/n)");
+        String response = scanner.nextLine();
+
+        if (response.equalsIgnoreCase("y")) {
+            while (true) {
+                System.out.println("Choose your topping (1) Meat, (2) Cheese, (3) Regular, (4) Sauce, (0) No more toppings:");
+                int toppingSelection = Integer.parseInt(scanner.nextLine());
+
+                if (toppingSelection == 0) break;
+
+                Topping selectedTopping = null;
+                switch (toppingSelection) {
+                    case 1:
+                        System.out.println("Choose your meat type (1) Steak, (2) Ham, (3) Salami, (4) Roast Beef, (5) Chicken, (6) Bacon");
+                        selectedTopping = switch (Integer.parseInt(scanner.nextLine())) {
+                            case 1 -> new Topping("Steak", ToppingType.MEAT, false);
+                            case 2 -> new Topping("Ham", ToppingType.MEAT, false);
+                            case 3 -> new Topping("Salami", ToppingType.MEAT, false);
+                            case 4 -> new Topping("Roast Beef", ToppingType.MEAT, false);
+                            case 5 -> new Topping("Chicken", ToppingType.MEAT, false);
+                            case 6 -> new Topping("Bacon", ToppingType.MEAT, false);
+                            default -> selectedTopping;
+                        };
+                        break;
+                    case 2:
+                        System.out.println("Choose your cheese type (1) American, (2) Provolone, (3) Cheddar, (4) Swiss");
+                        switch (Integer.parseInt(scanner.nextLine())) {
+                            case 1: selectedTopping = new Topping("American", ToppingType.CHEESE, false); break;
+                            case 2: selectedTopping = new Topping("Provolone", ToppingType.CHEESE, false); break;
+                            case 3: selectedTopping = new Topping("Cheddar", ToppingType.CHEESE, false); break;
+                            case 4: selectedTopping = new Topping("Swiss", ToppingType.CHEESE, false); break;
+                        }
+                        break;
+                    case 3:
+                        System.out.println("Choose your regular topping (1) Lettuce, (2) Peppers, (3) Onions, (4) Tomatoes, (5) Jalapenos, (6) Cucumbers, (7) Pickles, (8) Guacamole, (9) Mushrooms");
+                        switch (Integer.parseInt(scanner.nextLine())) {
+                            case 1: selectedTopping = new Topping("Lettuce",ToppingType.REGULAR, false); break;
+                            case 2: selectedTopping = new  Topping("Peppers",ToppingType.REGULAR, false); break;
+                            case 3: selectedTopping = new  Topping("Onions",ToppingType.REGULAR, false); break;
+                            case 4: selectedTopping = new  Topping("Tomatoes",ToppingType.REGULAR, false); break;
+                            case 5: selectedTopping = new  Topping("Jalapenos",ToppingType.REGULAR, false); break;
+                            case 6: selectedTopping = new  Topping("Cucumbers",ToppingType.REGULAR, false); break;
+                            case 7: selectedTopping = new  Topping("Pickles",ToppingType.REGULAR, false); break;
+                            case 8: selectedTopping = new  Topping("Guacamole",ToppingType.REGULAR, false); break;
+                            case 9: selectedTopping = new  Topping("Mushrooms",ToppingType.REGULAR, false); break;
+                        }
+                        break;
+                    case 4:
+                        System.out.println("Choose your sauces (1) Mayo, (2) Mustard, (3) Ketchup, (4) Ranch, (5) Thousand Islands, (6) Vinaigrette");
+                        switch (Integer.parseInt(scanner.nextLine())) {
+                            case 1: selectedTopping = new  Topping("Mayo",ToppingType.SAUCE, false); break;
+                            case 2: selectedTopping = new  Topping("Mustard",ToppingType.SAUCE, false); break;
+                            case 3: selectedTopping = new  Topping("Ketchup",ToppingType.SAUCE, false); break;
+                            case 4: selectedTopping = new  Topping("Ranch",ToppingType.SAUCE, false); break;
+                            case 5: selectedTopping = new  Topping("Thousand Islands",ToppingType.SAUCE, false); break;
+                            case 6: selectedTopping = new  Topping("Vinaigrette",ToppingType.SAUCE, false); break;
+                        }
+                        break;
+                    default:
+                        System.out.println("Invalid selection. Try again.");
+                        continue;
+                }
+
+                if (selectedTopping != null) {
+                    sandwich.addTopping(selectedTopping);
+                    System.out.println(selectedTopping.getName() + " added!");
+                }
+            }
+        } else {
+            System.out.println("No toppings added.");
+        }
+    }
+
 
     private static Size promptSize() {
         System.out.print("Select size (4, 8, 12 inches): ");

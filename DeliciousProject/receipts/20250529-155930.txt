@@ -1,0 +1,24 @@
+Order Summary:
+Sandwich 1:
+MEDIUM WHITE sandwich
+Toasted
+- Salami
+- American
+- Lettuce
+- Lettuce
+- Pickles
+- Ranch
+- Mayo
+
+Sandwich 2:
+TURKISHSignature Sandwich - TURKISH
+MEDIUM WHITE sandwich
+Toasted
+- Sucuk
+- Kasar
+- Tomatoes
+- Cucumbers
+
+MEDIUM drink - Lemonade ($2.5)
+French Fries chips ($1.50)
+Total: $25.00
