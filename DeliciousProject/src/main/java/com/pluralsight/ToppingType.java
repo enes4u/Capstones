@@ -1,5 +1,5 @@
 package com.pluralsight;
 
 public enum ToppingType {
-    REGULAR, MEAT, CHEESE
+    REGULAR, MEAT, CHEESE, SAUCE, SIDE
 }

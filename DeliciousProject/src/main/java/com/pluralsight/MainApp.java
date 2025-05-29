@@ -24,6 +24,17 @@ public class MainApp {
                     break;
                 case 0:
                     System.out.println("Thank you for using DELI-cious POS!");
+
+                    try {
+                        for (int i = 3; i > 0; i--) {
+                            System.out.println("Exiting in... " + i);
+                            Thread.sleep(1000); // Pause for 1 second between counts
+                        }
+                    } catch (InterruptedException e) {
+                        System.out.println("Oops! Something interrupted the countdown.");
+                    }
+
+                    System.out.println("Goodbye! Hope your next order is even more DELI-cious!");
                     System.exit(0);
                 default:
                     System.out.println("Invalid option. Try again.");
@@ -37,9 +48,10 @@ public class MainApp {
         while (true) {
             System.out.println("\nOrder Menu:");
             System.out.println("1) Add Sandwich");
-            System.out.println("2) Add Drink");
-            System.out.println("3) Add Chips");
-            System.out.println("4) Checkout");
+            System.out.println("2) Add Signature Sandwich (BLT or PHILLY or TURKISH Panini)");
+            System.out.println("3) Add Drink");
+            System.out.println("4) Add Chips ");
+            System.out.println("5) Checkout ");
             System.out.println("0) Cancel Order");
             System.out.print("Select an option: ");
 
@@ -49,15 +61,23 @@ public class MainApp {
             switch (choice) {
                 case 1:
                     Sandwich sandwich = buildSandwich();
+                    ToppingCustomizer.customizeSandwich(sandwich);
                     order.addSandwich(sandwich);
                     break;
                 case 2:
-                    order.addDrink(new Drink(promptSize(), prompt("Enter drink flavor: ")));
+                    System.out.print("Which signature sandwich? (BLT or PHILLY or Turkish Panini): ");
+                    String preset = scanner.nextLine();
+                    Sandwich sig = new SignatureSandwich(preset);
+                    ToppingCustomizer.customizeSandwich(sig);
+                    order.addSandwich(sig);
                     break;
                 case 3:
-                    order.addChip(new Chip(prompt("Enter chip type: ")));
+                    order.addDrink(new Drink(promptSize(), prompt("Enter drink flavor: ")));
                     break;
                 case 4:
+                    order.addChip(new Chip(prompt("Enter chip type: ")));
+                    break;
+                case 5:
                     System.out.println("\n" + order.getOrderSummary());
                     saveReceipt(order);
                     return;
@@ -72,7 +92,7 @@ public class MainApp {
 
     private static Sandwich buildSandwich() {
         System.out.println("Select bread type: WHITE, WHEAT, RYE, WRAP");
-        BreadType bread = BreadType.valueOf(scanner.nextLine().toUpperCase());
+        BreadType bread = BreadType.valueOf(scanner.nextLine().trim().toUpperCase());
 
         Size size = promptSize();
 
@@ -84,7 +104,7 @@ public class MainApp {
         // Add toppings interactively
         while (true) {
             System.out.println("Add a topping (type \"done\" to finish): ");
-            System.out.println("Type: REGULAR, MEAT, CHEESE");
+
             String name = scanner.nextLine();
             if (name.equalsIgnoreCase("done")) break;
 
@@ -92,7 +112,7 @@ public class MainApp {
             while (type == null) {
                 try {
                     System.out.println("Type: REGULAR, MEAT, CHEESE");
-                    String input = scanner.nextLine().toUpperCase();
+                    String input = scanner.nextLine().trim().toUpperCase();
                     type = ToppingType.valueOf(input);
                 } catch (IllegalArgumentException e) {
                     System.out.println("Invalid topping type. Please enter REGULAR, MEAT, or CHEESE.");
@@ -142,7 +162,7 @@ public class MainApp {
         }
     }
 
-    // TODO: SignatureSandwich class system to be implemented later
+    // DONE SignatureSandwich class system to be implemented later
 
 
     //  input-driven sandwich customization done

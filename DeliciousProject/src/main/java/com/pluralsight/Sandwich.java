@@ -36,6 +36,10 @@ public class Sandwich {
         return basePrice + toppingsTotal;
     }
 
+    public List<Topping> getToppings() {
+        return toppings;
+    }
+
     public String getDescription() {
         StringBuilder sb = new StringBuilder();
         sb.append(size).append(" ").append(breadType).append(" sandwich\n");

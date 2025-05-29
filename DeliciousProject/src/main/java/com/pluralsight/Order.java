@@ -43,7 +43,14 @@ public class Order {
         StringBuilder sb = new StringBuilder();
         sb.append("Order Summary:\n");
         for (int i = 0; i < sandwiches.size(); i++) {
+            Sandwich sandwich = sandwiches.get(i);
             sb.append("Sandwich ").append(i + 1).append(":\n");
+
+            if (sandwich instanceof SignatureSandwich) {
+                sb.append(((SignatureSandwich) sandwich).getPresetName());
+            }
+
+
             sb.append(sandwiches.get(i).getDescription()).append("\n");
         }
         for (Drink d : drinks) {

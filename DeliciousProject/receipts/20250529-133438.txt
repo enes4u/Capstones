@@ -1,0 +1,12 @@
+Order Summary:
+Sandwich 1:
+BLTSignature Sandwich - BLT
+MEDIUM WHITE sandwich
+Toasted
+- Bacon
+- Cheddar
+- Lettuce
+- Tomato
+- Ranch
+
+Total: $10.50
