@@ -79,9 +79,8 @@ public class ProductsController
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void updateProduct(@PathVariable int id, @RequestBody Product product)
     {
-        try
-        {
-            productDao.create(product);
+        try {
+            productDao.update(id, product); // bug fixed
         }
         catch(Exception ex)
         {
