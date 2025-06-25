@@ -14,7 +14,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 
 import java.util.List;
-
+@RestController
 // add the annotations to make this a REST controller
 // add the annotation to make this controller the endpoint for the following url
     // http://localhost:8080/categories
