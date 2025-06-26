@@ -35,9 +35,7 @@ public class SecurityUtils {
         } else if (authentication.getPrincipal() instanceof String) {
             username = (String) authentication.getPrincipal();
         }
-
         LOG.debug("found username '{}' in context", username);
-
         return Optional.ofNullable(username);
     }
 }

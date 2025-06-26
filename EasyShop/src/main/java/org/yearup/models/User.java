@@ -75,13 +75,11 @@ public class User {
          addRole(role);
       }
    }
-
    public void addRole(String role)
    {
       String authority = role.contains("ROLE_") ? role : "ROLE_" + role;
       this.authorities.add(new Authority(authority));
    }
-
    @Override
    public boolean equals(Object o) {
       if (this == o) return true;
@@ -108,7 +106,6 @@ public class User {
               ", authorities=" + authorities +
               '}';
    }
-
    @JsonIgnore
    public String getRole()
    {
